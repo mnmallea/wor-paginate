@@ -12,11 +12,15 @@ module Wor
           raise Wor::Paginate::Exceptions::InvalidLimitNumber if @limit <= 0
         end
 
-        def adapt?
-          required_methods.all? { |method| @content.respond_to? method }
+        def self.adapt?(content)
+          required_methods.all? { |method| content.respond_to? method }
         end
 
-        %i[required_methods paginated_content count total_count next_page].each do |method|
+        def self.required_methods
+          raise NotImplementedError
+        end
+
+        %i[paginated_content count total_count next_page].each do |method|
           define_method(method) { raise NotImplementedError }
         end
 

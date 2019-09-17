@@ -7,7 +7,7 @@ module Wor
       class WillPaginateAlreadyPaginated < Base
         attr_reader :page
 
-        def required_methods
+        def self.required_methods
           # Methods will_paginate adds to ActiveRecord relations:
           ### [:current_page, :total_entries, :total_entries=, :find_last, :current_page=,
           ### :scoped, :total_pages, :next_page, :previous_page, :out_of_bounds?]

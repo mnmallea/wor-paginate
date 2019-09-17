@@ -5,7 +5,7 @@ module Wor
   module Paginate
     module Adapters
       class Kaminari < Base
-        def required_methods
+        def self.required_methods
           %i[page]
         end
 

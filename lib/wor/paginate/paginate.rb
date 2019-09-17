@@ -32,8 +32,14 @@ module Wor
     end
 
     def find_adapter_for_content(content, options)
-      ADAPTERS.map { |adapter| adapter.new(content, page(options), limit(options)) }
-              .find(&:adapt?)
+      options[:adapter] || ADAPTERS
+        .find do |adapter|
+          begin
+            adapter.adapt?(content)
+          rescue Error
+            false
+          end
+        end&.new(content, page(options), limit(options))
     end
 
     def page(options)

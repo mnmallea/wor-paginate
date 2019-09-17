@@ -7,7 +7,7 @@ module Wor
       class WillPaginate < Base
         attr_reader :page
 
-        def required_methods
+        def self.required_methods
           %i[paginate]
         end
 

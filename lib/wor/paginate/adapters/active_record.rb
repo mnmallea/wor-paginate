@@ -7,7 +7,7 @@ module Wor
       class ActiveRecord < Base
         attr_reader :page
 
-        def required_methods
+        def self.required_methods
           %i[offset limit table_name]
         end
 

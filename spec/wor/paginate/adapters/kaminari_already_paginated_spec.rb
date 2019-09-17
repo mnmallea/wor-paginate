@@ -18,7 +18,7 @@ describe Wor::Paginate::Adapters::KaminariAlreadyPaginated do
         end
 
         it 'responds to required_methods' do
-          expect(adapter.required_methods).not_to be_empty
+          expect(adapter.class.required_methods).not_to be_empty
         end
 
         it 'responds to total_count' do
@@ -45,7 +45,7 @@ describe Wor::Paginate::Adapters::KaminariAlreadyPaginated do
         end
 
         it 'responds to required_methods' do
-          expect(adapter.required_methods).not_to be_empty
+          expect(adapter.class.required_methods).not_to be_empty
         end
 
         it 'responds to total_pages' do

@@ -6,7 +6,7 @@ module Wor
       class Enumerable < Base
         attr_reader :page
 
-        def required_methods
+        def self.required_methods
           %i[to_a]
         end
 

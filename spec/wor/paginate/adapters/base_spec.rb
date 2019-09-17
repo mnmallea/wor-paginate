@@ -7,7 +7,7 @@ describe Wor::Paginate::Adapters::Base do
         let(:adapter) { described_class.new(DummyModel, 1, 1) }
 
         it 'throws error when calling required_methods' do
-          expect { adapter.required_methods }.to raise_error(NotImplementedError)
+          expect { adapter.class.required_methods }.to raise_error(NotImplementedError)
         end
 
         it 'throws error when calling paginated_content' do
