@@ -5,9 +5,7 @@ module Wor
   module Paginate
     module Adapters
       class Kaminari < Base
-        def self.required_methods
-          %i[page]
-        end
+        self.required_methods = %i[page]
 
         def paginated_content
           @paginated_content ||= @content.page(@page).per(@limit)

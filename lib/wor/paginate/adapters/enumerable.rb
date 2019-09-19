@@ -6,9 +6,7 @@ module Wor
       class Enumerable < Base
         attr_reader :page
 
-        def self.required_methods
-          %i[to_a]
-        end
+        self.required_methods = %i[to_a]
 
         def paginated_content
           return @paginated_content if @paginated_content

@@ -4,12 +4,10 @@ module Wor
   module Paginate
     module Adapters
       class KaminariAlreadyPaginated < Base
-        def self.required_methods
-          # Methods Kaminari adds to ActiveRecord relations:
-          ### [:padding, :per, :total_pages, :num_pages, :current_page, :first_page?,
-          ### :prev_page, :last_page?, :next_page, :out_of_range?, :total_count, :entry_name]
-          %i[padding total_count num_pages current_page prev_page]
-        end
+        # Methods Kaminari adds to ActiveRecord relations:
+        ### [:padding, :per, :total_pages, :num_pages, :current_page, :first_page?,
+        ### :prev_page, :last_page?, :next_page, :out_of_range?, :total_count, :entry_name]
+        self.required_methods = %i[padding total_count num_pages current_page prev_page]
 
         def paginated_content
           @paginated_content ||= @content.page(@page).per(@limit)

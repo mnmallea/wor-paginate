@@ -7,9 +7,7 @@ module Wor
       class ActiveRecord < Base
         attr_reader :page
 
-        def self.required_methods
-          %i[offset limit table_name]
-        end
+        self.required_methods = %i[offset limit table_name]
 
         def paginated_content
           @paginated_content ||= @content.offset(offset).limit(@limit)
