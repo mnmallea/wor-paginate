@@ -12,6 +12,7 @@ module Wor
     ].freeze
 
     def render_paginated(content, options = {})
+      raise ArgumentError if options[:limit] && options[:limit] <= 0
       return render_paginate_with_include(content, options) if includes?(options)
 
       render json: paginate(content, options)
@@ -20,7 +21,7 @@ module Wor
     def paginate(content, options = {})
       adapter = find_adapter_for_content(content, options)
       raise Exceptions::NoPaginationAdapter if adapter.blank?
-      formatter_class(options).new(adapter, options).format
+      formatter_class(options).new(adapter, formater_options(options)).format
     end
 
     def render_paginate_with_include(content, options)
@@ -57,6 +58,10 @@ module Wor
         Config.max_limit,
         option_limit(options) || param_limit || Config.default_per_page
       ].min
+    end
+
+    def formater_options(options)
+      options.merge(limit: limit(options))
     end
   end
 end

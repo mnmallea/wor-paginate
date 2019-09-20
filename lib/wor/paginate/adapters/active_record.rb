@@ -21,10 +21,6 @@ module Wor
           @content.count
         end
 
-        def total_pages
-          (total_count.to_f / @limit.to_f).ceil
-        end
-
         private
 
         def offset

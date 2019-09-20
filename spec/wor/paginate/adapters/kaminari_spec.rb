@@ -24,14 +24,6 @@ describe Wor::Paginate::Adapters::Kaminari do
           expect(adapter.required_methods).not_to be_empty
         end
 
-        it 'responds to total_count' do
-          expect(adapter.total_count).to be n
-        end
-
-        it 'responds to total_pages' do
-          expect(adapter.total_pages).to be 2
-        end
-
         it 'responds to paginated_content' do
           expect(adapter.paginated_content.class).to be paginated.class
         end

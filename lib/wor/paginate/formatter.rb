@@ -21,10 +21,32 @@ module Wor
 
       protected
 
-      delegate :count, :total_count, :total_pages, :next_page, to: :adapter
+      delegate :count, :total_count, to: :adapter
+
+      def count
+        return [options[:count], limit].min if options[:count]
+        adapter.count
+      end
+
+      def total_pages
+        (total_count.to_f / limit.to_f).ceil
+      end
+
+      def limit
+        options[:limit]
+      end
+
+      def total_count
+        options[:total_count] || adapter.total_count
+      end
 
       def current_page
         adapter.page.to_i
+      end
+
+      def next_page
+        return nil if current_page >= total_pages
+        current_page + 1
       end
 
       def paginated_content
