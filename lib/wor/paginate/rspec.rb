@@ -29,7 +29,8 @@ end
 RSpec::Matchers.define :be_paginated do
   match do |actual_response|
     formatter = @custom_formatter || Wor::Paginate::Formatter
-    @formatted_keys = formatter.new(MockedAdapter.new).format.as_json.keys
+    @formatted_keys = formatter.new(MockedAdapter.new, limit: ::Wor::Paginate::Config.max_limit)
+                               .format.as_json.keys
     actual_response.keys == @formatted_keys
   end
 

@@ -21,11 +21,13 @@ module Wor
 
       protected
 
-      delegate :count, :total_count, to: :adapter
-
       def count
-        return [options[:count], limit].min if options[:count]
+        return [options[:total_count], limit].min if options[:total_count]
         adapter.count
+      end
+
+      def total_count
+        options[:total_count] || adapter.total_count
       end
 
       def total_pages
@@ -34,10 +36,6 @@ module Wor
 
       def limit
         options[:limit]
-      end
-
-      def total_count
-        options[:total_count] || adapter.total_count
       end
 
       def current_page
