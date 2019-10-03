@@ -40,4 +40,8 @@ class DummyModelsController < ApplicationController
   def index_custom_formatter
     render_paginated DummyModel, formatter: CustomFormatter
   end
+
+  def index_custom_count
+    render_paginated DummyModel, total_count: params[:total_count].to_i
+  end
 end

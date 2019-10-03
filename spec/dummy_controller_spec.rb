@@ -373,5 +373,35 @@ describe DummyModelsController, type: :controller do
         expect(response_body(response)['items']).to eq expected_list
       end
     end
+
+    context 'with a custom total count' do
+      before do
+        get :index_custom_count, params: { total_count: total_count }
+      end
+
+      context 'when total count is lower than page limit' do
+        let(:total_count) { 5 }
+
+        it 'responds with expected total count' do
+          expect(response_body(response)['total_count']).to eq total_count
+        end
+
+        it 'responds with expected page count' do
+          expect(response_body(response)['count']).to eq total_count
+        end
+      end
+
+      context 'when total count is lower than page limit' do
+        let(:total_count) { Wor::Paginate::Config.default_per_page + 1 }
+
+        it 'responds with expected total count' do
+          expect(response_body(response)['total_count']).to eq total_count
+        end
+
+        it 'responds with expected page count' do
+          expect(response_body(response)['count']).to eq Wor::Paginate::Config.default_per_page
+        end
+      end
+    end
   end
 end
